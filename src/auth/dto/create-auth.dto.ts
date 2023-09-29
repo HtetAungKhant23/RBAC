@@ -1,14 +1,14 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
+import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsPhoneNumber, IsString } from "class-validator";
 
 enum RoleEnum {
-  SUPERADMIN = 'SUPERADMIN',
-  ADMIN = 'ADMIN',
-  USER = 'USER',
-  MODERATOR = 'MODERATOR',
+  SUPERADMIN = "SUPERADMIN",
+  ADMIN = "ADMIN",
+  USER = "USER",
+  MODERATOR = "MODERATOR",
 }
 
-export class CreateAuthDto {
+export class RegisterDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsPhoneNumber()
@@ -19,7 +19,12 @@ export class CreateAuthDto {
   @IsString()
   name: string;
 
-  @ApiProperty({ enum: RoleEnum, default: 'ADMIN' })
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  password: string;
+
+  @ApiProperty({ enum: RoleEnum, default: "ADMIN" })
   @IsNotEmpty()
   role: RoleEnum;
 }
