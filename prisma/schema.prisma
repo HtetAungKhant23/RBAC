@@ -6,3 +6,71 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id           String    @id @default(uuid()) @db.VarChar(255)
+  phone        String    @unique @db.VarChar(255)
+  password     String?
+  status       Status    @default(ACTIVE)
+  refreshToken String?
+  lastOnline   DateTime?
+  fcmToken     String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  profile Profile?
+  Product Product[]
+}
+
+model Profile {
+  id      String  @id @default(uuid()) @db.VarChar(255)
+  name    String
+  address String?
+  userId  String  @unique
+  User    User    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  photoId String? @unique
+  Photo   File?   @relation(fields: [photoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  role    Role
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model Product {
+  id        String  @id @default(uuid()) @db.VarChar(255)
+  name      String
+  code      String  @unique
+  photoId   String? @unique
+  Photo     File?   @relation(fields: [photoId], references: [id])
+  createdBy String
+  CreatedBy User    @relation(fields: [createdBy], references: [id])
+}
+
+model File {
+  id     String @id @default(uuid()) @db.VarChar(255)
+  name   String
+  link   String
+  status Status @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  Profile Profile?
+  Product Product?
+}
+
+enum Status {
+  ACTIVE
+  DELETED
+}
+
+enum Role {
+  SUPERADMIN
+  ADMIN
+  USER
+  MODERATOR
+}
