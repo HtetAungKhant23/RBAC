@@ -9,17 +9,17 @@ enum RoleEnum {
 }
 
 export class RegisterDto {
-  @ApiProperty()
+  @ApiProperty({example: '+95912345678'})
   @IsNotEmpty()
   @IsPhoneNumber()
   phone: string;
 
-  @ApiProperty()
+  @ApiProperty({example: 'Htet Aung Khant'})
   @IsNotEmpty()
   @IsString()
   name: string;
 
-  @ApiProperty()
+  @ApiProperty({example: '123456'})
   @IsNotEmpty()
   @IsString()
   password: string;
@@ -30,12 +30,12 @@ export class RegisterDto {
 }
 
 export class LoginDto {
-  @ApiProperty()
+  @ApiProperty({ example: "+95912345678" })
   @IsNotEmpty()
   @IsPhoneNumber()
   phone: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: "123456" })
   @IsNotEmpty()
   @IsString()
   password: string;

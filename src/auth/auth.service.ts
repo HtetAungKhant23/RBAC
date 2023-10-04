@@ -69,7 +69,7 @@ export class AuthService {
           id: user.id,
         },
         data: {
-          refreshToken: user.refreshToken,
+          refreshToken: token.refreshToken,
         },
       });
 
