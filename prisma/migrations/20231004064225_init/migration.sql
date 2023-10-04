@@ -38,6 +38,7 @@ CREATE TABLE `Product` (
     `name` VARCHAR(191) NOT NULL,
     `code` VARCHAR(191) NOT NULL,
     `photoId` VARCHAR(191) NULL,
+    `createdBy` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `Product_code_key`(`code`),
     UNIQUE INDEX `Product_photoId_key`(`photoId`),
@@ -65,3 +66,6 @@ ALTER TABLE `Profile` ADD CONSTRAINT `Profile_photoId_fkey` FOREIGN KEY (`photoI
 
 -- AddForeignKey
 ALTER TABLE `Product` ADD CONSTRAINT `Product_photoId_fkey` FOREIGN KEY (`photoId`) REFERENCES `File`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Product` ADD CONSTRAINT `Product_createdBy_fkey` FOREIGN KEY (`createdBy`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
