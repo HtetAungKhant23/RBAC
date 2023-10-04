@@ -15,7 +15,7 @@ export class RoleGuard implements CanActivate {
   constructor(private reflector: Reflector, private accessControlService: AccessControlService) {}
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-    const requiredRoles = this.reflector.getAllAndOverride<Role[]>("roles", [context.getHandler(), context.getClass()]);
+    const requiredRoles = this.reflector.getAllAndOverride<Role[]>(Role_Key, [context.getHandler(), context.getClass()]);
     const request = context.switchToHttp().getRequest();
     const currentUser = request["user"] as currentUserDto;
 
