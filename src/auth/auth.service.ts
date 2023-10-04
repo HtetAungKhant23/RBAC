@@ -3,6 +3,7 @@ import { LoginDto, RegisterDto } from "./dto/create-auth.dto";
 import { PrismaService } from "src/prisma.service";
 import { JwtService } from "@nestjs/jwt";
 import { Responser } from "src/libs/responser";
+import { hash } from "argon2";
 
 type ReturnToken = { accessToken: string; refreshToken: string };
 @Injectable()
@@ -66,10 +67,10 @@ export class AuthService {
 
       await this.prisma.user.update({
         where: {
-          id: user.id,
+          phone: user.phone,
         },
         data: {
-          refreshToken: token.refreshToken,
+          refreshToken: await hash(token.refreshToken),
         },
       });
 
