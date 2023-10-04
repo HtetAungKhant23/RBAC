@@ -28,3 +28,15 @@ export class RegisterDto {
   @IsNotEmpty()
   role: RoleEnum;
 }
+
+export class LoginDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsPhoneNumber()
+  phone: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  password: string;
+}

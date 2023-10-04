@@ -1,5 +1,5 @@
 import { HttpException, Injectable } from "@nestjs/common";
-import { RegisterDto } from "./dto/create-auth.dto";
+import { LoginDto, RegisterDto } from "./dto/create-auth.dto";
 import { PrismaService } from "src/prisma.service";
 import { JwtService } from "@nestjs/jwt";
 import { Responser } from "src/libs/responser";
@@ -16,7 +16,7 @@ export class AuthService {
           phone: dto.phone,
         },
       });
-      if (existingUser) throw new Error("User Already Exist!");
+      if (existingUser) return new HttpException({ message: "User already exist", devMessage: "user-already-exist" }, 404);
       const newUser = await this.prisma.user.create({
         data: {
           phone: dto.phone,
@@ -33,13 +33,11 @@ export class AuthService {
         },
       });
 
-      const token = await this.generateToken(newUser.id, newUser.profile.role);
-
       return Responser({
         statusCode: 201,
         message: "Registration Success",
         devMessage: "register-success",
-        body: { accessToken: token.accessToken },
+        body: newUser,
       });
     } catch (err) {
       throw new HttpException(
@@ -47,7 +45,47 @@ export class AuthService {
           message: err.message || "Failed to register!",
           devMessage: err.message || "",
         },
-        401,
+        500,
+      );
+    }
+  }
+
+  async login(dto: LoginDto) {
+    try {
+      const user = await this.prisma.user.findFirst({
+        where: {
+          AND: [{ phone: dto.phone }, { password: dto.password }],
+        },
+        include: {
+          profile: true,
+        },
+      });
+      if (!user) return new HttpException({ message: "User not found!", devMessage: "user-not-found" }, 404);
+
+      const token = await this.generateToken(user.id, user.profile.role);
+
+      await this.prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          refreshToken: user.refreshToken,
+        },
+      });
+
+      return Responser({
+        statusCode: 201,
+        message: "Registration Success",
+        devMessage: "register-success",
+        body: token,
+      });
+    } catch (err) {
+      throw new HttpException(
+        {
+          message: err.message || "Failed to login!",
+          devMessage: err.message || "",
+        },
+        500,
       );
     }
   }
