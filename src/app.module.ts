@@ -4,12 +4,14 @@ import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
 import { PrismaService } from "./prisma.service";
 import { JwtService } from "@nestjs/jwt";
+import { ProductModule } from "./product/product.module";
+import { AccessControlService } from "./auth/access-control.service";
 
 @Global()
 @Module({
-  imports: [AuthModule],
+  imports: [AuthModule, ProductModule],
   controllers: [AppController],
-  providers: [AppService, PrismaService, JwtService],
-  exports: [PrismaService, JwtService],
+  providers: [AppService, PrismaService, JwtService, AccessControlService],
+  exports: [PrismaService, JwtService, AccessControlService],
 })
 export class AppModule {}
