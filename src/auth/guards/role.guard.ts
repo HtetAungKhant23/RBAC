@@ -1,9 +1,9 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
-import { Role } from "../enums/role.enum";
 import { Role_Key } from "../decorators/role.decorator";
 import { Observable } from "rxjs";
 import { AccessControlService } from "../access-control.service";
+import { Role } from "@prisma/client";
 
 export type currentUserDto = {
   id: string;

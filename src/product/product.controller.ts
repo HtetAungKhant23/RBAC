@@ -5,8 +5,8 @@ import { IAuthRequest } from "src/libs/authRequest";
 import { CreateProductDto } from "./dto/create-product-dto";
 import { AuthGuard } from "src/auth/guards/auth.guard";
 import { RoleGuard } from "src/auth/guards/role.guard";
-import { Role } from "src/auth/enums/role.enum";
 import { Roles } from "src/auth/decorators/role.decorator";
+import { Role } from "@prisma/client";
 
 @Controller("product")
 @ApiTags("Product")

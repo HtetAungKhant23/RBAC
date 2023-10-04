@@ -1,5 +1,5 @@
 import { Global, Injectable } from "@nestjs/common";
-import { Role } from "./enums/role.enum";
+import { Role } from "@prisma/client";
 
 interface IsAuthorizedParams {
   currentRole: Role;
