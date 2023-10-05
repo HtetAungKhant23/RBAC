@@ -1,73 +1,79 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Role-Based Access Control (RBAC) with NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Introduction
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Role-Based Access Control (RBAC) is a crucial aspect of security and permission management in modern web applications. This repository serves as a comprehensive resource for understanding and implementing RBAC in NestJS.
 
-## Description
+## Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Role Management
+- User Role Assignment
+- API Endpoint Authorization
+- Fine-Grained Access Control
 
-## Installation
+## Getting Started
 
-```bash
-$ pnpm install
-```
+### Prerequisites
 
-## Running the app
+Before you begin, ensure you have met the following requirements:
 
-```bash
-# development
-$ pnpm run start
+- Node.js and npm installed
+- NestJS CLI installed
+- Mysql installed
 
-# watch mode
-$ pnpm run start:dev
+### Installation
 
-# production mode
-$ pnpm run start:prod
-```
+1. Clone the repository :
 
-## Test
+   ```bash
+   git clone https://github.com/HtetAungKhant23/RBAC
+   ```
 
-```bash
-# unit tests
-$ pnpm run test
+2. Navigate to the project directory :
 
-# e2e tests
-$ pnpm run test:e2e
+   ```bash
+   cd RBAC
+   ```
 
-# test coverage
-$ pnpm run test:cov
-```
+3. Install dependencies :
 
-## Support
+   ```bash
+   pnpm install
+   ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+4. Create .env :
 
-## Stay in touch
+   ```bash
+   cp .env.example .env
+   ```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+5. Configure your database connection in .env:
 
-## License
+   ```dotenv
+   DATABASE_URL=your_database_url
+   PORT=your_database_port
+   JWT_ACCESS_TOKEN=your_jwt_access_token_key
+   JWT_REFRESH_TOKEN=your_jwt_refresh_token_key
+   ```
 
-Nest is [MIT licensed](LICENSE).
+6. Migrate your database :
+
+   ```bash
+   npx prisma migrate deploy
+   npx prisma generate
+   ```
+
+7. Start the NestJS application :
+
+   ```bash
+   pnpm start:dev
+   ```
+
+The application will be available at http://localhost:8800/docs.
+
+#### Reference
+
+[Medium Blog](https://medium.com/@dev.muhammet.ozen/role-based-access-control-in-nestjs-15c15090e47d)
+[ by Muhammet Özen](https://medium.com/@dev.muhammet.ozen)
+
+Special thanks to [ Muhammet Özen](https://medium.com/@dev.muhammet.ozen) for the insightful article that inspired this repository.
