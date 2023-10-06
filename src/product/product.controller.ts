@@ -20,7 +20,6 @@ export class ProductController {
   @ApiOperation({ summary: "Create Product" })
   @ApiBody({ type: CreateProductDto })
   createProduct(@Request() req: IAuthRequest, @Body() dto: CreateProductDto) {
-    console.log("ha", req.user.role);
     return this.productService.createProduct(req.user.id, dto);
   }
 }

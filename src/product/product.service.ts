@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma.service";
 import { CreateProductDto } from "./dto/create-product-dto";
 import { Responser } from "src/libs/responser";
@@ -23,7 +23,13 @@ export class ProductService {
         body: product,
       });
     } catch (err) {
-      console.log(err);
+      throw new HttpException(
+        {
+          message: "Failed to create product!",
+          devMessage: err.message || "",
+        },
+        500,
+      );
     }
   }
 }
