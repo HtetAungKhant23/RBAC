@@ -7,6 +7,7 @@ Role-Based Access Control (RBAC) is a crucial aspect of security and permission 
 ## Features
 
 - Role Management
+- Permission Management (not implement yet)
 - User Role Assignment
 - API Endpoint Authorization
 - Fine-Grained Access Control
